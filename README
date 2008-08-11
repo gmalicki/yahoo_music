@@ -6,7 +6,9 @@ recommendations and ratings.
 http://developer.yahoo.com/music/
 
 This library implements a ruby wrapper around the Yahoo Music API.  The result set
-from each API call is returned as a Ruby hash.    
+from each API call is returned as a Ruby hash.   The API is only a couple days old
+so this library is not yet complete although a lot of important functionality is
+available. 
 
 
 Example usage:
@@ -16,12 +18,18 @@ require 'yahoo_music'
 # create a new YahooMusic API instance using your Yahoo Music API Key.
 ym = YahooMusic.new 'kKq7PobV34GpmKOYLFtflkij2CRaUQJVAxtracFYGgdk2ZfxUSeed3.a6j6KpRE-'
 
+# preform a video search
 video_data = ym.video_search('The Beatles')
 
 video_data.class => Hash
 video_data['Videos'].count => 10
-
 video_data['Videos'].each { |video| puts video['uri'] }
 
+
+# preform a video search that returns similar artists
+video_data = ym.video_search('The Beatles', :response => ['videos', 'topsimilar'])
+
+
+# preform an artist search
 artist_data = ym.artist_search('Nirvana')
 

@@ -90,11 +90,13 @@ class YahooMusic
   # Video Service
   #
   
+  # see http://developer.yahoo.com/music/api_guide/VideoService.html
   def video_by_ids(ids, options={})
     resp_types, opts = merge_defaults(options, %w(main artists releases tracks categories))
     self.class.get("/video/v1/item/#{ids.map{ |id| id.to_s }.join(',')}?response=#{resp_types.join(',')}", opts)
   end
   
+  # see http://developer.yahoo.com/music/api_guide/VideoService.html
   def video_by_artist_letter(letter, options={})
     resp_types, opts = merge_defaults(options, %w(artists releases tracks categories))
     self.class.get("/video/v1/list/artist/alpha/#{letter}?response=#{resp_types.join(',')}", opts)
